@@ -1,0 +1,751 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgb(217, 216, 216);
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+    position: relative;
+    margin-bottom: 30px;
+  }
+  
+  .left-section {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .logo-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 30px;
+    
+  }
+
+  nav {
+    display: flex;
+    gap: 20px;
+  }
+
+  nav a {
+    text-decoration: none;
+    font-size: medium;
+    font-weight: normal;
+    color: #2862BA;
+    position: relative;
+    padding: 5px;
+    transition: all 0.3s ease;
+  }
+
+  nav a.active{
+    color: #EF2D30;
+    text-decoration: none;
+  }
+
+nav a:hover {
+    color: #808080;
+    text-decoration: none;
+  }
+
+h1{
+    margin-left: 30px;
+    padding: 20px 10px;
+    font-size:large;
+    font-weight: bold;
+    color: #808080 ;
+
+}
+
+.container-content{
+    background-color: white;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.availability{
+    margin-left: 30px;
+    margin-right: 30px;
+    padding: 15px;
+    border: 2px solid #A7CAFF;
+    border-radius: 5px;
+    background-color: #E5EFFF;
+    font-size: small;
+    color: #6b7280 ;
+
+}
+
+h3{
+    font-weight: bold;
+    color: #6b7280 ;
+}
+
+.calendar-container {
+    margin: 30px;
+    background-color: #f9fafb; 
+    border-radius: 5px; 
+    padding: 15px;      
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.month-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.month-navigation button{
+    padding: 0.25rem 0.75rem; 
+    border-radius: 0.375rem; 
+    background-color: #e5e7eb; 
+    color: #6b7280 ; 
+    cursor: pointer;        
+    transition: background-color 0.3s ease; 
+    font-size: 0.875rem; 
+    border: 1px solid #d1d5db;
+}
+
+.month-navigation button:hover {
+    background-color: #d1d5db; 
+}
+
+.month-navigation h2 {
+    font-size: large;      
+    font-weight: 700;         
+    color: #6b7280 ;         
+    margin: 0;
+}
+
+.days-of-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); 
+    margin-bottom: 0.5rem;
+    font-size: medium;      
+    font-weight: 600;         
+    color: #7B827E;         
+    text-align: center;
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); 
+    gap: 0.50rem;
+}
+
+.day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem; 
+    padding: 1rem;          
+    text-align: center;
+    cursor: pointer;          
+    transition: background-color 0.3s ease; 
+    font-size: medium;
+    font-weight: 700;
+    border: 1px solid transparent; 
+}
+
+.day:hover {
+    background-color: #f0f0f0; 
+    border-color: #d1d5db;  
+}
+
+.day.available {
+    background-color: #e0f2fe; 
+    color: #0369a1;        
+}
+.day.available:hover{
+  background-color: #b0e0fe;
+}
+
+.day.reserved {
+    background-color: #fecaca; 
+    color: #b91c1c;        
+}
+
+.day.your-reservation {
+    background-color: #fef08a; 
+    color: #854d0e;
+}
+
+.day.past {
+    background-color: #d1d5db; 
+    color: #6b7280;        
+    cursor: not-allowed;    
+}
+.day.selected{
+   background-color: #60a5fa; 
+   color: #fff;
+}
+
+.legend {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    font-size: 0.90rem;
+    font-weight: 500;
+    color: #4b5563;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+}
+
+.legend-color {
+    width: 0.90rem;
+    height: 0.90rem;
+    border-radius: 0.375rem;
+    margin-right: 0.25rem;
+}
+
+.legend-available .legend-color {
+    background-color: #e0f2fe;
+}
+.legend-reservation .legend-color{
+     background-color: #fef08a;
+}
+
+.legend-reserved .legend-color {
+    background-color: #fecaca;
+}
+
+.legend-past .legend-color {
+    background-color: #d1d5db;
+}
+
+#selected-date-container {
+    margin: 30px;
+    padding: 15px;
+    border: 2px solid #A7CAFF;
+    border-radius: 5px;
+    background-color: #E5EFFF;
+    text-align: justify;
+    font-size: small;
+    color: #6b7280;
+}
+
+.reservation{
+    margin: 30px;
+    font-size:large;
+    font-weight: bold;
+    color: #6b7280 ;
+
+}
+
+#student-form {
+    padding: 20px 20px;
+    border-radius: 0.375rem; 
+    border: #ccc solid 1px;
+    margin: 30px;
+    font-weight: 500;
+    font-size: small;
+  }
+  
+.form-group {
+    margin-bottom: 15px;
+    border-color: #808080;
+    color: #6b7280;
+    
+  }
+  
+.students-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: small;
+    color: #6b7280 ;
+  }
+  
+.custom-input {
+    width: calc(100% - 12px); 
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    font-size: small;
+    box-sizing: border-box;
+  }
+  
+.custom-input:focus {
+    outline: none;
+    border-color: #deeeff; 
+    box-shadow: 0 0 5px; 
+  }
+  
+.error-message {
+    color: #dc3545; 
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+.custom-button {
+    background-color: #386EC2;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: small;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+.custom-button:hover {
+    background-color: #7fa0d7;
+  }
+  
+.w-full {
+    width: 110px; 
+    margin-left: 82.5%;
+  }
+
+.description {
+    font-size: 0.875rem; /* text-sm */
+    color: #6b7280; /* text-gray-500 */
+    margin-top: 0.5rem; /* mt-2 */
+    max-width: 90%;
+}
+
+.program-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+
+.program-btn {
+    width: 15rem; /* Adjusted to fit "BS Early Childhood Education" comfortably */
+    padding: 0.25rem 1rem;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: small;
+    font-weight: normal;
+    text-align: justify;
+    white-space: wrap;
+}
+
+
+.program-btn:hover {
+    background-color: #386EC2 ; /* blue-400 */
+    color: white;
+}
+
+
+.program-btn.selected {
+    background-color: #386EC2 ; /* blue-500 */
+    color: white;
+    font-weight: normal;
+}
+
+/*add a save button here*/
+
+
+/* Style for each student container */
+.student-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+
+.student-header {
+    font-size: medium;
+    font-weight: normal;
+    color: #6b7280 ;
+}
+
+
+.student-fields {
+    display: flex;
+    gap: 15px;
+    color: #6b7280 ;
+}
+
+
+.student-name, .student-id {
+    flex: 1;
+    color: #6b7280 ;
+}
+
+
+.custom-input {
+    width: 100%;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #6b7280 ;
+}
+
+
+.custom-label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+
+.time-selection{
+    margin-left: 30px;
+    margin-right: 30px;
+    padding: 15px;
+    border: 2px solid #A7CAFF;
+    border-radius: 5px;
+    background-color: #E5EFFF;
+    font-size: small;
+    color: #6b7280 ;
+
+}   
+.time-slots-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    
+}
+
+.time-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+}
+
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.time-slot {
+    color: white;
+    border-radius: 10px;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: medium;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.legend {
+    display: flex;
+    gap: 20px;
+    font-size: small;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+}
+
+.available {
+    background-color: #A1C4F8;
+}
+
+.selected {
+    background-color: #1852AC;
+    
+}
+
+.reserved {
+    background-color: #FF5B5E;
+    cursor: not-allowed;
+}
+
+.reservation-details-container {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 30px;
+    
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: small;
+    font-weight: 600;
+}
+
+.form-group select,
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing:inherit;
+    font-size: small;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.guidelines{
+    margin: 0px;
+    padding: 15px;
+    border: 2px solid #A7CAFF;
+    border-radius: 5px;
+    background-color: #E5EFFF;
+    font-size: small;
+    color: #6b7280 ;
+}
+
+#submit-reservation{
+    background-color: #386EC2;
+    color: white;
+    padding: 12px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: small;
+    transition: background-color 0.3s ease;
+    margin-left: 73%;
+    margin-bottom: 30px;
+}
+
+#submit-reservation:hover {
+    background-color: #6B92CE;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+#reminder-confirmation{
+    padding: 8px;
+    width: 80%;
+    border: 2px solid #A7CAFF;
+    border-radius: 5px;
+    background-color: #E5EFFF;
+    font-size: small;
+    text-wrap: wrap;
+    color: #6b7280 ;
+    margin-bottom: 10px;
+}
+
+#reminder-confirmation p{
+    padding: 0%;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    max-width: 40%;
+}
+
+.modal-content h2{
+    color: #1852AC;
+    font-weight: bold;
+    font-size: large;
+    padding-bottom: 5px;
+}
+
+.modal-content p{
+    color: #808080;
+    font-weight: normal;
+    font-size: medium;
+    padding-bottom: 5px;
+}
+
+.close-button {
+    color: #808080;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modal-students-list {
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+/* Basic table styling */
+#modal-students-list table {
+    width: 60%;
+    border-collapse: collapse;
+    font-size: medium;
+    color: #808080;
+}
+
+#modal-students-list th,
+#modal-students-list td {
+    border: 1px solid #ffffff;
+    padding: 5px;
+    text-align: left;
+    font-weight: normal;
+    font-size: normal;
+
+}
+
+#modal-students-list th {
+    background-color: #ffffff;
+    font-weight: bold;
+}
+
+#modal-students-list tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+#confirm-button{
+    background-color: #1852AC;
+    color: white;
+    font-size: small;
+    padding: 10px 10px;
+    margin-top: 5px;
+    margin-left: 75%;
+    border-radius: 8px
+}
+
+#confirm-button:hover{
+    color: white;
+    background-color: #103770;
+
+}
+
+footer {
+    background-color: #1852AC; /* Stronger, darker blue */
+    color: #fff;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Vertically center items */
+    width: 35%; /* Increased width for better spacing */
+    max-width: 1200px; /* Maximum width for the whole footer content */
+    margin-bottom: 20px; /* Add space before the copyright */
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    margin-top: 20px;
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    gap: 8px; 
+}
+
+.footer-right h1{
+    font-size: larger;
+    color: white;
+    text-align: justify;
+}
+
+.footer-right p{
+    font-size: small;
+    font-weight: bold;
+}
+
+.footer-logo {
+    margin-bottom: 10px;
+}
+
+.footer-logo img {
+    height: 150px; /* Slightly larger logo */
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Reduced gap */
+    color: white;
+}
+
+.contact-info img {
+    height: 20px; /* Consistent icon size */
+    width: 20px;
+}
+
+.copyright {
+    font-size: 0.9em;
+    color: #ffffff; /* Lighter shade for copyright */
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments (optional - adjust as needed) */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+    } 
+    .footer-left, .footer-right {
+        align-items: center; /* Center items on smaller screens */
+    }
+}

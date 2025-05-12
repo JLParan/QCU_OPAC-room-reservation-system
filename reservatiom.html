@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="reservation.css"> 
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+    <header>
+        <div class="left-section">
+          <div class="logo-icon">
+            <img src="/images/Logo.jpg"alt="QCU Logo">
+          </div>
+          <nav>
+            <a href="home.html">Home</a>
+            <a href="aboutUs.html">About Us</a>
+            <a href="Libservices.html">Services</a>
+            <a href="/contact.html">Contact Us</a>
+          </nav>
+        </div>
+    </header>
+
+
+
+<section class="container">
+    <div class="container-content">
+        <h1>Collaborative Room Reservation Form</h1>
+        <section class="availability">
+            <div class="room-hours">
+                <h3>
+                    <span style="display: inline-block; width: 20px; height: 20px; background-image: url('/images/info-circle.png'); background-size: contain; vertical-align: middle; margin-right: 3px;"></span> Collaborative Room Operating Hours </h3>
+                <p><b>Monday - Saturday: </b> 7:00 AM - 9:00 PM</p>
+                <p class="note">Please check the availability below and make your reservations accordingly.</p>
+            </div>
+        </section>
+
+        <section class="calendar">
+                <div class="calendar-container">
+                    <div class="month-navigation">
+                        <button id="prev-month">❮</button>
+                        <h2 id="month-name">May 2025</h2>
+                        <button id="next-month">❯</button>
+                    </div>
+       
+                    <div class="days-of-week">
+                        <div>SUN</div>
+                        <div>MON</div>
+                        <div>TUE</div>
+                        <div>WED</div>
+                        <div>THU</div>
+                        <div>FRI</div>
+                        <div>SAT</div>
+                    </div>
+                    <div class="days-grid" id="days-grid">
+                        </div>
+                    <div class="legend">
+                        <div class="legend-item legend-available">
+                            <div class="legend-color"></div>
+                            <div>Available</div>
+                        </div>
+                        <div class="legend-item legend-reservation">
+                            <div class="legend-color"></div>
+                            <div>Your Reservation</div>
+                        </div>
+                        <div class="legend-item legend-reserved">
+                            <div class="legend-color"></div>
+                            <div>Fully Booked</div>
+                        </div>
+                        <div class="legend-item legend-past">
+                            <div class="legend-color"></div>
+                            <div>Past Dates</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="selected-date-container">
+            <b>Selected Date: </b><span id="selected-date-text"></span> <br>
+            <span style="display: inline-block; width: 20px; height: 20px; background-image: url('/images/info-circle.png'); background-size: contain; vertical-align: middle; margin-right: 3px;"></span> Please be reminded to leave the room clean and tidy after use. Kindly ensure all items are returned to their proper places and any trash is disposed of appropriately.</h3>
+        </div>
+
+        <section class="student-form-container">
+            <form id="student-form">
+                <div class="form-group">
+                    <label for="name" class="custom-label">Name</label>
+                    <input type="text" id="name" name="name" class="custom-input" placeholder="Enter name">
+                    <p id="name-error" class="error-message"></p>
+                </div>
+                <div class="form-group">
+                    <label for="student-id" class="custom-label">Student ID</label>
+                    <input type="text" id="student-id" name="student-id" class="custom-input" placeholder="Enter student ID">
+                    <p id="student-id-error" class="error-message"></p>
+                </div>
+                <div class="form-group">
+                    <label class="custom-label mb-2 block">Select Your Program</label>
+                    <div id="program-toggle" class="flex flex-wrap gap-2">
+                        <button type="button" class="program-btn" data-program="BS Information Technology">BS Information Technology</button>
+                        <button type="button" class="program-btn" data-program="BS Industrial Engineering">BS Industrial Engineering</button>
+                        <button type="button" class="program-btn" data-program="BS Electronics Engineering">BS Electronics Engineering</button>
+                        <button type="button" class="program-btn" data-program="BS Entrepreneurship">BS Entrepreneurship</button>
+                        <button type="button" class="program-btn" data-program="BS Accountancy">BS Accountancy</button>
+                        <button type="button" class="program-btn" data-program="BS Management Accountancy">BS Management Accountancy</button>
+                        <button type="button" class="program-btn" data-program="BS Information System">BS Information System</button>
+                        <button type="button" class="program-btn" data-program="BS Early Childhood Education">BS Early Childhood Education</button>
+                        <button type="button" class="program-btn" data-program="BS Computer Science">BS Computer Science</button>
+                    </div>
+                    <input type="hidden" name="program" id="selected-program">
+                    <p id="program-error" class="error-message"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="num-students" class="custom-label">Number of Students</label>
+                    <select id="num-students" name="num-students" class="custom-input">
+                        <option value="" disabled selected>-- Select Number of Students --</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div id="students-container"></div>
+            </section>
+
+            <section class="time-slots-container">
+                <div class="time-container">
+                    <div class="time-slots">
+                        <div class="time-slot available clickable" data-time="7:00">7:00</div>
+                        <div class="time-slot available clickable" data-time="7:30">7:30</div>
+                        <div class="time-slot available clickable" data-time="8:00">8:00</div>
+                        <div class="time-slot available clickable" data-time="8:30">8:30</div>
+                        <div class="time-slot available clickable" data-time="9:00">9:00</div>
+                        <div class="time-slot available clickable" data-time="9:30">9:30</div>
+                        <div class="time-slot available clickable" data-time="10:00">10:00</div>
+                        <div class="time-slot available clickable" data-time="10:30">10:30</div>
+                        <div class="time-slot available clickable" data-time="11:00">11:00</div>
+                        <div class="time-slot available clickable" data-time="11:30">11:30</div>
+                        <div class="time-slot available clickable" data-time="12:00">12:00</div>
+                        <div class="time-slot available clickable" data-time="12:30">12:30</div>
+                        <div class="time-slot available clickable" data-time="1:00">1:00</div>
+                        <div class="time-slot available clickable" data-time="1:30">1:30</div>
+                        <div class="time-slot available clickable" data-time="2:00">2:00</div>
+                        <div class="time-slot available clickable" data-time="2:30">2:30</div>
+                        <div class="time-slot available clickable" data-time="3:00">3:00</div>
+                        <div class="time-slot available clickable" data-time="3:30">3:30</div>
+                        <div class="time-slot available clickable" data-time="4:00">4:00</div>
+                        <div class="time-slot available clickable" data-time="4:30">4:30</div>
+                        <div class="time-slot available clickable" data-time="5:00">5:00</div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="color-box available"></div>
+                            <span>Available</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box selected"></div>
+                            <span>Selected</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box reserved"></div>
+                            <span>Reserved</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+<section class="time-selection">
+         <div id="reminder-container">
+            <span style="display: inline-block; width: 20px; height: 20px; background-image: url('/images/info-circle.png'); background-size: contain; vertical-align: middle; margin-right: 3px;"></span> Please select your desired reservation start time. All displayed hours are within the library’s operating hours.</h3>
+        </div>
+</section>
+
+<section class="reservation-details">
+    <div class="reservation-details-container">
+            <div class="form-group">
+            </div>
+            <div class="form-group">
+                <label for="end-time">Reservation Start Time:</label>
+                <input type="text" id="start-time" value="" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="end-time">Reservation End Time:</label>
+                <input type="text" id="end-time" value="" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="reason">Reason for Reservation:</label>
+                <textarea id="reason"></textarea>
+            </div>
+
+
+            <section class="guidelines">
+                <div id="reminder-container">
+                   <span style="display: inline-block; width: 20px; height: 20px; background-image: url('/images/info-circle.png'); background-size: contain; vertical-align: middle; margin-right: 3px;"></span><b>For Collab Room Reservation please READ the guidelines.</b><br>
+                   1. Collaboration rooms may reserved one day advance . Same day reservation automatically cancelled.<br>
+                   2. If a group does not claim a reservation within 15 minutes of the scheduled reservation, it will be forfeited.<br>
+                   3. Collab Rooms may be reserved for a maximum of 1 hour per day.<br>
+                   4. Each Collab Room’s capacity is minimum of 5, maximum of 10 persons.<br>
+                   5. Eating and drinking are not allowed inside the Collab Room.<br>
+                   <br>
+                   THANK YOU.</h3>
+               </div>
+</section>
+        </div>
+        <button id="submit-reservation">Submit Reservation →</button>
+    </div>
+    </div>
+</section>
+
+<div id="reservation-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <div id="reminder-confirmation">
+            <span style="display: inline-block; width: 20px; height: 20px; background-image: url('/images/info-circle.png'); background-size: contain; vertical-align: middle; margin-right: 3px;"></span> Please ensure all details are accurate and confirm accordingly.</p>
+        </div>        
+        <p><strong>Date:</strong> <span id="modal-date"></span></p>
+        <p><strong>Time:</strong> <span id="modal-time"></span></p>
+        <p><strong>Program:</strong> <span id="modal-program"></span></p>
+        <p><strong>Number of Students:</strong> <span id="modal-num-students"></span></p>
+        <div id="modal-students-list">
+            </div>
+        <button id="confirm-button">Confirm Reservation</button>
+    </div>
+</div>
+
+
+
+<footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <img src="/images/qcu.png" alt="Quezon City University Logo">
+                </div>
+            </div>
+            <div class="footer-right">
+                <h1><b>Contact Us</b></h1>
+                <div class="contact-info">
+                    <img src="/images/gmail-logo.png" alt="Email Icon">
+                    <a href="mailto:library@qcu.edu.ph">library@qcu.edu.ph</a>
+                </div>
+                <div class="contact-info">
+                    <img src="/images/fb-logo.png" alt="Facebook Icon">
+                    <a href="https://www.facebook.com/qculibraries" target="_blank">facebook.com/qculibraries</a>
+                </div>
+                <p>673 Quirino Highway Brgy. San Bartolome,<br>Novaliches, Quezon City, Metro Manila</p>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2025 QCU. All Rights Reserved.</p>
+    </footer>
+
+
+
+
+<script src="reservation.js"></script>
+
+<script>
+    const startTimeSelect = document.getElementById("start-time");
+    if (startTimeSelect) {
+        startTimeSelect.addEventListener('change', updateEndTime);
+    } else {
+        console.error("Element with ID 'start-time-select' not found.");
+    }
+</script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const submitReservationBtn = document.getElementById('submit-reservation');
+    const confirmBtn = document.getElementById('confirm-button');
+    const confirmationModal = document.getElementById('confirmation-modal');
+
+    // Handle "Submit Reservation" - just show modal
+    submitReservationBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // Basic validation (optional)
+      const numStudents = parseInt(document.getElementById('num-students').value);
+      if (!numStudents || isNaN(numStudents)) {
+        alert('Please select number of students.');
+        return;
+      }
+
+      confirmationModal.style.display = 'block'; // Show modal
+    });
+
+    // Handle "Confirm" button in modal
+    confirmBtn.addEventListener('click', async function (e) {
+      e.preventDefault();
+
+      // Prepare data
+      const date = selectedDate ? selectedDate.toISOString().split('T')[0] : '';
+      const program = document.getElementById('selected-program').value;
+      const numStudents = parseInt(document.getElementById('num-students').value);
+      const start_time = document.getElementById('start-time').value;
+      const end_time = document.getElementById('end-time').value;
+      const reason = document.getElementById('reason').value;
+
+      const nameInputs = document.querySelectorAll('input[name^="student-name-"]');
+      const idInputs = document.querySelectorAll('input[name^="student-id-"]');
+      const students = [];
+
+      nameInputs.forEach((input, index) => {
+        const name = input.value.trim();
+        const id = idInputs[index]?.value.trim();
+        if (name && id) {
+          students.push({ name, id });
+        }
+      });
+
+      // Add the student from the static "Name" and "Student ID" fields
+const mainName = document.getElementById('name')?.value.trim();
+const mainId = document.getElementById('student-id')?.value.trim();
+
+if (mainName && mainId) {
+  students.unshift({ name: mainName, id: mainId }); // Add as the main student
+}
+
+
+      if (students.length === 0) {
+        alert("Please enter at least one student.");
+        return;
+      }
+
+      const reservationData = {
+        date,
+        time: `${start_time} - ${end_time}`,
+        program,
+        numStudents,
+        reason,
+        students
+      };
+
+      try {
+        fetch('http://localhost:3000/confirm-button', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(reservationData),
+})
+.then(response => response.text())  // .text() to get plain text response
+.then(data => {
+    console.log('Success:', data);
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+
+
+        const text = await response.text();
+        if (response.ok) {
+          alert('Reservation submitted successfully!');
+
+          // Clear form fields
+          document.getElementById('selected-date-text').value = '';
+          document.getElementById('name').value = '';
+            document.getElementById('student-id').value = '';
+          document.getElementById('program-toggle').value = '';
+          document.getElementById('num-students').value = '';
+          document.getElementById('start-time').value = '';
+          document.getElementById('end-time').value = '';
+          document.getElementById('reason').value = '';
+          nameInputs.forEach(input => input.value = '');
+          idInputs.forEach(input => input.value = '');
+
+          confirmationModal.style.display = 'none'; // Hide modal
+        } else {
+          alert('Submission failed: ' + text);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Reservation submitted.');
+      }
+    });
+  });
+</script>
+
+<script>
+    
+
+        // Add event listener to update end time when start time changes
+        startTimeSelect.addEventListener('change', updateEndTime);
+    
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+            const timeSlotsContainer = document.querySelector('.time-slots');
+            const timeSlots = timeSlotsContainer.querySelectorAll('.time-slot');
+
+            timeSlots.forEach(slot => {
+                if (slot.classList.contains('available') || slot.classList.contains('selected')) {
+                    slot.classList.add('clickable'); // Add a 'clickable' class for styling if needed
+                    slot.addEventListener('click', function() {
+                        const previouslySelected = document.querySelector('.time-slot.selected');
+                        if (previouslySelected && previouslySelected !== this) {
+                            previouslySelected.classList.remove('selected');
+                        }
+                        if (!this.classList.contains('reserved')) {
+                            this.classList.toggle('selected');
+                        }
+                    });
+                }
+            });
+        });
+</script>
+<script>
+            document.addEventListener('DOMContentLoaded', function() {
+            const timeSlotsContainer = document.querySelector('.time-slots');
+            const timeSlots = timeSlotsContainer.querySelectorAll('.time-slot');
+            const startTimeInput = document.getElementById('start-time');
+            const endTimeInput = document.getElementById('end-time');
+            let selectedStartTime = startTimeInput.value; // Initialize with the initially selected time
+
+            // Function to format time (add leading zero if needed)
+            function formatTime(hour, minute) {
+                const hourStr = hour < 10 ? '0' + hour : hour;
+                const minuteStr = minute < 10 ? '0' + minute : minute;
+                return `${hourStr}:${minuteStr}`;
+            }
+
+            // Function to calculate and update the end time
+            function updateEndTime(startTime) {
+                if (startTime) {
+                    const [startHourStr, startMinuteStr] = startTime.split(':');
+                    let startHour = parseInt(startHourStr);
+                    const startMinute = parseInt(startMinuteStr);
+                    startHour = (startHour + 1) % 24; // Add one hour, handle wrap-around
+                    endTimeInput.value = formatTime(startHour, startMinute);
+                } else {
+                    endTimeInput.value = '';
+                }
+            }
+
+            // Function to update the displayed start time
+            function updateStartTimeDisplay(time) {
+                startTimeInput.value = time;
+                selectedStartTime = time;
+                updateEndTime(time); // Calculate and update end time
+            }
+
+            timeSlots.forEach(slot => {
+                if (slot.classList.contains('available') || slot.classList.contains('selected')) {
+                    slot.addEventListener('click', function() {
+                        const previouslySelected = document.querySelector('.time-slot.selected');
+                        if (previouslySelected && previouslySelected !== this) {
+                            previouslySelected.classList.remove('selected');
+                        }
+                        if (!this.classList.contains('reserved')) {
+                            this.classList.add('selected');
+                            updateStartTimeDisplay(this.dataset.time);
+                        }
+                    });
+                } else if (slot.classList.contains('selected')) {
+                    // Ensure the initially selected time and end time are displayed
+                    updateStartTimeDisplay(slot.dataset.time);
+                }
+            });
+
+            // Initialize end time on page load
+            updateEndTime(startTimeInput.value);
+        });
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const submitReservationButton = document.getElementById('submit-reservation');
+    const reservationModal = document.getElementById('reservation-modal');
+    const closeModalButton = reservationModal.querySelector('.close-button');
+    const confirmButton = document.getElementById('confirm-button');
+    const cancelButton = document.getElementById('cancel-button');
+    const modalDate = document.getElementById('modal-date');
+    const modalTime = document.getElementById('modal-time');
+    const modalProgram = document.getElementById('modal-program');
+    const modalNumStudents = document.getElementById('modal-num-students');
+    const modalStudentsList = document.getElementById('modal-students-list');
+    const selectedDateText = document.getElementById('selected-date-text');
+    const selectedProgramInput = document.getElementById('selected-program');
+    const numStudentsSelect = document.getElementById('num-students');
+    const studentForm = document.getElementById('student-form');
+    const startTimeInput = document.getElementById('start-time');
+
+    submitReservationButton.addEventListener('click', function() {
+        const selectedDate = selectedDateText.textContent;
+        const selectedTime = startTimeInput.value;
+        const program = selectedProgramInput.value;
+        const numStudents = numStudentsSelect.value;
+        const studentDetails = [];
+        const nameInputs = studentForm.querySelectorAll('input[name^="student-name-"]');
+        const idInputs = studentForm.querySelectorAll('input[name^="student-id-"]');
+
+        if (!selectedDate || !selectedTime || !program || !numStudents) {
+            alert('Please select a date, time, program, and number of students.');
+            return;
+        }
+
+        nameInputs.forEach((nameInput, index) => {
+            const idInput = idInputs[index];
+            if (nameInput.value && idInput.value) {
+                studentDetails.push({ name: nameInput.value, id: idInput.value });
+            }
+        });
+
+        modalDate.textContent = selectedDate;
+        modalTime.textContent = selectedTime;
+        modalProgram.textContent = program;
+        modalNumStudents.textContent = numStudents;
+
+        if (studentDetails.length > 0) {
+            let tableHTML = '<h2 style="color:#1852AC; font-weight: bold;">Student Details:</h2><table><thead><tr><th>Name</th><th>Student ID</th></tr></thead><tbody>';
+            studentDetails.forEach(student => {
+                tableHTML += `<tr><td>${student.name}</td><td>${student.id}</td></tr>`;
+            });
+            tableHTML += '</tbody></table>';
+            modalStudentsList.innerHTML = tableHTML;
+        } else {
+            modalStudentsList.innerHTML = '';
+        }
+
+        reservationModal.style.display = 'block';
+    });
+
+    closeModalButton.addEventListener('click', function() {
+        reservationModal.style.display = 'none';
+    });
+
+    cancelButton.addEventListener('click', function() {
+        reservationModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target == reservationModal) {
+            reservationModal.style.display = 'none';
+        }
+    });
+
+    confirmButton.addEventListener('click', function() {
+        // Here you would typically send the reservation data to the server
+        const selectedDate = modalDate.textContent;
+        const selectedTime = modalTime.textContent;
+        const program = modalProgram.textContent;
+        const numStudents = modalNumStudents.textContent;
+        const studentDetails = [];
+        const nameInputs = studentForm.querySelectorAll('input[name^="student-name-"]');
+        const idInputs = studentForm.querySelectorAll('input[name^="student-id-"]');
+
+        nameInputs.forEach((nameInput, index) => {
+            const idInput = idInputs[index];
+            if (nameInput.value && idInput.value) {
+                studentDetails.push({ name: nameInput.value, id: idInput.value });
+            }
+        });
+
+        const reservationData = {
+            date: selectedDate,
+            time: selectedTime,
+            program: program,
+            numStudents: numStudents,
+            students: studentDetails
+            // Add other relevant data if needed (e.g., reason)
+        };
+
+        console.log('Reservation Data:', reservationData);
+        alert('Reservation submitted!'); // Replace with actual submission logic
+        reservationModal.style.display = 'none';
+    });
+
+    // Dynamically add student name and ID fields based on the number of students selected
+    numStudentsSelect.addEventListener('change', function() {
+        const num = parseInt(this.value);
+        const studentsContainer = document.getElementById('students-container');
+        studentsContainer.innerHTML = ''; // Clear previous fields
+
+        for (let i = 0; i < num; i++) {
+            const studentDiv = document.createElement('div');
+            studentDiv.classList.add('form-group');
+
+            const nameLabel = document.createElement('label');
+            nameLabel.classList.add('custom-label');
+            nameLabel.textContent = `Student ${i + 1} Name`;
+            const nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.name = `student-name-${i + 1}`;
+            nameInput.classList.add('custom-input');
+            nameInput.placeholder = 'Enter name';
+
+            const idLabel = document.createElement('label');
+            idLabel.classList.add('custom-label');
+            idLabel.textContent = `Student ${i + 1} ID`;
+            const idInput = document.createElement('input');
+            idInput.type = 'text';
+            idInput.name = `student-id-${i + 1}`;
+            idInput.classList.add('custom-input');
+            idInput.placeholder = 'Enter student ID';
+
+            studentDiv.appendChild(nameLabel);
+            studentDiv.appendChild(nameInput);
+            studentDiv.appendChild(idLabel);
+            studentDiv.appendChild(idInput);
+            studentsContainer.appendChild(studentDiv);
+        }
+    });
+
+    // Handle program selection
+    const programButtons = document.querySelectorAll('.program-btn');
+    programButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            programButtons.forEach(btn => btn.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedProgramInput.value = this.getAttribute('data-program');
+        });
+    });
+
+    // Basic styling for selected program button
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .program-btn.selected {
+            background-color: #007bff;
+            color: white;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Basic styling for error messages (you might have this in your CSS)
+    const errorStyle = document.createElement('style');
+    errorStyle.innerHTML = `
+        .error-message {
+            color: red;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+    `;
+    document.head.appendChild(errorStyle);
+});
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url('images/bg.jpg'); /* Make sure this is the correct path */
+    background-repeat: no-repeat;
+    background-size: cover; /* Cover the whole screen */
+    background-position: center; /* Ensure the background is centered */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.logo-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 30px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: medium;
+    font-weight: normal;
+    color: #2862BA;
+    position: relative;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+nav a.active {
+    color: #EF2D30;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #808080;
+    text-decoration: none;
+}
+
+.logo-container img {
+    max-height: 50px;
+}
+
+main {
+    padding: 20px;
+}
+
+.hero {
+    background-size: cover;
+    background-position: center;
+    color: #fff; 
+    font-weight: bold;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero-content {
+    text-align: justify;
+    max-width: 80%;
+    margin: 0 auto 0 100px;
+}
+
+.hero h1 {
+    text-shadow: 2px 2px #6C7470;
+    font-size: 4em;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.hr {
+    border: none;
+    margin-right: 50px;
+    width: 80%;
+    background-color: white;
+}
+
+.button {
+    display: inline-block;
+    background-color: #1852AC; 
+    color: #fff; 
+    margin: 20px auto auto auto;
+    padding: 15px 15px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px #123d7e;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    background-color: #1852AC; /* Stronger, darker blue */
+    color: #fff;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Vertically center items */
+    width: 35%; /* Increased width for better spacing */
+    max-width: 1200px; /* Maximum width for the whole footer content */
+    margin-bottom: 20px; /* Add space before the copyright */
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    margin-top: 20px;
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    gap: 8px; 
+}
+
+.footer-right h1 {
+    font-size: larger;
+    color: white;
+    text-align: justify;
+}
+
+.footer-right p {
+    font-size: small;
+    font-weight: bold;
+}
+
+.footer-logo {
+    margin-bottom: 10px;
+}
+
+.footer-logo img {
+    height: 150px; /* Slightly larger logo */
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Reduced gap */
+    color: white;
+}
+
+.contact-info img {
+    height: 20px; /* Consistent icon size */
+    width: 20px;
+}
+
+.copyright {
+    font-size: 0.9em;
+    color: #ffffff; /* Lighter shade for copyright */
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* Responsive adjustments (optional - adjust as needed) */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .footer-left, .footer-right {
+        align-items: center; /* Center items on smaller screens */
+    }
+}

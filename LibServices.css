@@ -1,0 +1,264 @@
+/* Apply Poppins font to the body */
+body {
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif; /* Poppins font applied globally */
+  overflow-y: auto;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.logo-icon img {
+  height: 25px;
+  width: auto;
+  margin-left: 30px;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  font-size: medium;
+  font-weight: normal;
+  color: #2862BA;
+  position: relative;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+nav a.active {
+  color: #EF2D30;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #808080;
+  text-decoration: none;
+}
+
+.logo-container img {
+  max-height: 50px;
+}
+
+
+.logo-icon img {
+  height: 30px;  /* Reduce the height */
+  width: auto;   /* Maintain aspect ratio */
+}
+
+
+.carousel {
+  height: 550px;
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+  max-width: 100%;
+  margin-bottom: 50px;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.7s ease-in-out;
+  width: 300%;
+}
+
+.slider section {
+  flex: 0 0 100vw;
+  height: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider section img {
+  width: 80%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.slider-controls ul {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.slider-controls ul li {
+  width: 14px;
+  height: 14px;
+  border: 1px solid #333;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.slider-controls ul li.selected {
+  background: #555;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 40px;
+  color: #2862BA;
+  margin: 40px 0 30px 0;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+  row-gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.square {
+  width: 600px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 50px 30px;
+  color: #808080;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.square:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.square h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+  margin-top: -30px;
+  font-weight: bold;
+  color: #656866;
+  text-align: center;
+}
+
+.square p {
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+footer {
+  background-color: #1852AC; /* Stronger, darker blue */
+  color: #fff;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Vertically center items */
+  width: 35%; /* Increased width for better spacing */
+  max-width: 1200px; /* Maximum width for the whole footer content */
+  margin-bottom: 20px; /* Add space before the copyright */
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  margin-top: 20px;
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  gap: 8px; 
+}
+
+.footer-right h1{
+  font-size: larger;
+  color: white;
+  text-align: justify;
+}
+
+.footer-right p{
+  font-size: small;
+  font-weight: bold;
+}
+
+.footer-logo {
+  margin-bottom: 10px;
+}
+
+.footer-logo img {
+  height: 150px; /* Slightly larger logo */
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Reduced gap */
+  color: white;
+}
+
+.contact-info img {
+  height: 20px; /* Consistent icon size */
+  width: 20px;
+}
+
+.copyright {
+  font-size: 0.9em;
+  color: #ffffff; /* Lighter shade for copyright */
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments (optional - adjust as needed) */
+@media (max-width: 768px) {
+  .footer-content {
+      flex-direction: column;
+      gap: 20px;
+  }
+  .footer-left, .footer-right {
+      align-items: center; /* Center items on smaller screens */
+  }
+}

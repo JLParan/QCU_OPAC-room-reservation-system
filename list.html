@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+  <title>Reservation List</title>
+  <link rel="stylesheet" href="list.css" />
+</head>
+<body>
+
+  <div class="sidebar-container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="images/admin-logo.png">
+          </div>
+  
+        <nav>
+          <a href="dashboard.html"><img src="images/home.png" alt="Dashboard"></a>
+          <a href="list.html"><img src="images/list-active.png"></a>
+          <a href="calendar.html"><img src="images/calendar.png"></a>
+          <a href="notification.html"><img src="images/notification.png"></a>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="search-container">
+            <input type="text" class="search" placeholder="Search...">
+            <img src="/images/search.png" alt="Search Icon" class="search-icon">
+          </div>
+        
+          <div class="profile">
+            <div class="profile-info" onclick="toggleDropdown()">
+              <span class="avatar">👤</span>
+              <span class="name">Vienne</span>
+              <span class="role">admin</span>
+            </div>
+            <div class="dropdown" id="dropdown">
+              <a href="#">Log out</a>
+            </div>
+          </div>
+        </header>
+
+    
+    <!-- Title + Date bar -->
+    <div class="title-bar">Reservation List</span></p>
+    </div>
+    
+    <!-- Reservations Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Student No.</th>
+          <th>Date</th>
+          <th>Pax</th>
+          <th>Time-in</th>
+          <th>Time-out</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td>Carcer, Stefanie Vienne</td>
+          <td>23-1844</td>
+          <td>05-1-25</td>
+          <td>5</td>
+          <td>12:00 PM</td>
+          <td>1:00 PM</td>
+          <td><span class="status ongoing">Ongoing</span></td>
+          <td><a href="#" class="edit-link">[edit]</a></td>
+        </tr>
+        <!-- More rows... -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="overlay" id="modalOverlay">
+    <div class="modal-box">
+      <button class="close-btn" onclick="closeModal()">×</button>
+      <div class="modal-content">
+        <div class="modal-labels">
+          <p>ID</p><p>Name</p><p>Student No.</p><p>Date</p><p>Pax</p>
+          <p>Participants</p><p>Time-in</p><p>Time-out</p><p>Status</p>
+        </div>
+        <div class="modal-fields">
+          <p>01</p>
+          <p>Carcer, Stefanie Vienne</p>
+          <p>23-1844</p>
+          <p>05-1-25</p>
+          <p>5</p>
+          <div class="participant-select">
+            <select disabled><option>Ibo, Justine</option></select>
+            <small class="note">[View Only]</small>
+          </div>
+          <p>12:00 PM</p>
+          <p>1:00 PM</p>
+          <div class="status-select">
+            <select>
+              <option selected>Ongoing</option>
+              <option>Approved</option>
+              <option>Cancelled</option>
+              <option>Completed</option>
+            </select>
+            <small class="note">(Editable)</small>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+        <button class="save-btn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal() { document.getElementById('modalOverlay').style.display = 'flex'; }
+    function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
+    window.onload = function() {
+      const dateEl = document.getElementById('date');
+      const now = new Date();
+      dateEl.textContent = now.toLocaleDateString('en-US', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+      });
+    };
+  </script>
+</body>
+</html>
+     
+    </div>
+    <script src="admin2.js"></script>
+  </body>
+  </html>
