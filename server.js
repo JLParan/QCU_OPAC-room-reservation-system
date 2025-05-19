@@ -42,13 +42,13 @@ const db = new sqlite3.Database('./database/reservation.db', (err) => {
 app.locals.db = db;
 
 // Set static folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname)); // serve from the main folder
 
 // POST route for reservation confirmation
 app.post('/confirm-button', (req, res) => {
     console.log('POST request received for /confirm-button');
     console.log('Request body:', req.body);
-    const { date, time, program, numStudents, students, reason = '' } = req.body;
+    const { date, time, program, numStudents, students, reason, created_at = '' } = req.body;
 
     if (!Array.isArray(students) || students.length === 0) {
         return res.status(400).send('Student details are required');
@@ -57,11 +57,15 @@ app.post('/confirm-button', (req, res) => {
     const [start_time, end_time] = time.split(' - ').map(str => str.trim());
     const mainStudent = students[0];
     const companionStudents = students.slice(1); // rest go to Addedstud
+    const createdAtFormatted = new Date(created_at).toLocaleString('en-PH', { timeZone: 'Asia/Manila' });
+console.log("Formatted created_at in PHT:", createdAtFormatted);
+// Example output: "5/16/2025, 12:46:38 PM" (depends on your system's locale)
+
 
     const insertReservation = `
         INSERT INTO Reservation 
-        (date, fullName, studID, num_participants, program, start_time, end_time, reason)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        (date, fullName, studID, num_participants, program, start_time, end_time, reason, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     db.run(insertReservation, [
@@ -72,7 +76,8 @@ app.post('/confirm-button', (req, res) => {
         program,
         start_time,
         end_time,
-        reason
+        reason,
+        created_at
     ], function (err) {
         if (err) {
             console.error('Error inserting main reservation:', err.message);
@@ -138,5 +143,134 @@ transporter.sendMail(mailOptions, (error, info) => {
         });
     });
 });
+
+// GET route to fetch reservation records
+app.get('/api/reservations', (req, res) => {
+    const sql = `
+        SELECT reservationID, fullName, studID, date, num_participants, program, start_time, end_time, reason
+        FROM Reservation
+        ORDER BY date DESC
+    `;
+
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            console.error('Failed to fetch reservations:', err.message);
+            return res.status(500).json({ error: 'Database error' });
+        }
+        res.json(rows);
+    });
+});
+
+app.get('/api/notifications', (req, res) => {
+    const sql = `
+        SELECT reservationID, fullName, date, program, start_time, created_at
+        FROM Reservation
+        ORDER BY created_at DESC
+        LIMIT 50`; // Adjust the limit based on how many notifications you want to show
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            console.error('Error fetching notifications:', err.message);
+            return res.status(500).json({ error: 'Failed to fetch notifications' });
+        }
+        const notifications = rows.map(reservation => {
+            return {
+                message: `<strong>New Reservation:</strong> ${reservation.fullName} has made a new reservation.`,
+                time: new Date(reservation.created_at).toLocaleTimeString(),
+            };
+        });
+        res.json(notifications);
+    });
+});
+
+// GET route to fetch today's reservations
+app.get('/api/reservations-today', (req, res) => {
+    const selectedDate = req.query.date;
+
+    if (!selectedDate) {
+        return res.status(400).json({ error: 'Date is required' });
+    }
+
+    const sql = `
+        SELECT reservationID, fullName, date, start_time
+        FROM Reservation
+        WHERE DATE(date) = DATE(?)
+        ORDER BY start_time ASC
+    `;
+
+    const datePattern = selectedDate + '%';
+
+    db.all(sql, [selectedDate], (err, rows) => {
+        if (err) {
+            console.error('Error fetching reservations:', err.message);
+            return res.status(500).json({ error: 'Database error' });
+        }
+
+        res.json(rows);
+    });
+});
+
+// GET route to fetch total number of bookings
+app.get('/api/total-bookings', (req, res) => {
+    const sql = `SELECT COUNT(*) AS total FROM Reservation`;
+
+    db.get(sql, [], (err, row) => {
+        if (err) {
+            console.error('Error fetching total bookings:', err.message);
+            return res.status(500).json({ error: 'Database error' });
+        }
+
+        res.json({ total: row.total });
+    });
+});
+
+app.get('/inbox-preview', (req, res) => {
+    const sql = `
+      SELECT 
+        fullName AS notificationText,
+        created_at AS timestamp
+      FROM Reservation
+      ORDER BY created_at DESC
+      LIMIT 3
+    `;
+
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            console.error('Error fetching inbox notifications:', err.message);
+            return res.status(500).json({ error: 'Failed to fetch notifications' });
+        }
+        // Map to notification format you want
+        const notifications = rows.map(row => ({
+  text: `New Reservation by ${row.notificationText}`,
+  timestamp: new Date(row.timestamp).toLocaleTimeString()
+}));
+        res.json(notifications);
+    });
+});
+
+// GET route to fetch latest reservations preview
+app.get('/api/reservations-preview', (req, res) => {
+    const sql = `
+        SELECT 
+            reservationID AS ID,
+            fullName AS Name,
+            studID AS StudentNo,
+            start_time AS TimeIn,
+            end_time AS TimeOut,
+            num_participants AS Pax
+        FROM Reservation
+        ORDER BY created_at DESC
+        LIMIT 3
+    `;
+
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            console.error('Error fetching reservations preview:', err.message);
+            return res.status(500).json({ error: 'Failed to fetch reservations preview' });
+        }
+
+        res.json(rows);
+    });
+});
+
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

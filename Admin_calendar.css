@@ -315,3 +315,7 @@ font-weight: bold;
   border-radius: 0.375rem;
   margin-right: 0.25rem;
 }
+
+#selected-date-text{
+  display: none;
+}

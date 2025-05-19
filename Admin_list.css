@@ -134,6 +134,9 @@ body {
   text-align: right;
 }
 
+grouped:hover {
+  background-color: #f1f1f1;
+}
 /* Table */
 table {
   width: 98%;
@@ -162,6 +165,44 @@ td a {
 }
 tr {
   border-bottom: 1px solid #eee;
+}
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+.status.ongoing {
+  background-color: #d9edf7;
+  color: #31708f;
+}
+.status.approved {
+  background-color: #dff0d8;
+  color: #3c763d;
+}
+.status.rejected {
+  background-color: #f2dede;
+  color: #a94442;
+}
+
+.status.reserved {
+  color: green;
+  font-weight: bold;
+}
+
+.status.ongoing {
+  color: orange;
+  font-weight: bold;
+}
+
+.status.completed {
+  color: gray;
+  font-weight: bold;
+}
+
+.status.void {
+  color: red;
+  font-weight: bold;
 }
 
 /* Status badge */

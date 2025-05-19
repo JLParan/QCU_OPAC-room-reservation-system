@@ -133,18 +133,19 @@ color: #656866;
   color: #808080;
 }
 
+.notification-entry:hover {
+  background-color: #f1f1f1;
+}
+
 /* Container */
-.container {
+.notifications-list {
   width: 100%;
-  max-width: 1500px;
-  border: 2px solid #ccc;
+  border: 1px solid #f0f0f0;
   background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  overflow-y: auto;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   margin-right: 100px; 
-  margin-top: 10px;/* Center it within available main-content width */
-  position: relative;
+  margin-top: 20px;/* Center it within available main-content width */
 }
 
 /* Notification Entry */
@@ -152,25 +153,31 @@ color: #656866;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px;
-  border-bottom: 3px solid #eee;
+  padding: 15px 20px;
+  border-bottom: 1.5px solid #f0f0f0;
+  margin: 0; /* REMOVE any accidental spacing */
+}
+
+.notification-entry:last-child {
+  border-bottom: none;
 }
 
 .notif-icon {
-  width: 25px;
+  width: 20px;
   height: px;
   margin-right: 15px;
+  filter: brightness(0) saturate(100%) invert(36%) sepia(6%) saturate(470%) hue-rotate(180deg) brightness(95%);
 }
 
 .notif-message {
   flex: 1;
-  font-size: 16px;
+  font-size: 13px;
   color: #656866 ;
   margin: 0;
 }
 
 .notif-time {
-  font-size: 14px;
+  font-size: 13px;
   color: #656866;
   margin-left: 15px;
   white-space: nowrap;

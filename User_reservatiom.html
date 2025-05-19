@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation</title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link rel="stylesheet" href="reservation.css"> 
+    <link rel="stylesheet" href="User_reservation.css"> 
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
@@ -20,10 +20,10 @@
             <img src="/images/Logo.jpg"alt="QCU Logo">
           </div>
           <nav>
-            <a href="home.html">Home</a>
-            <a href="aboutUs.html">About Us</a>
-            <a href="Libservices.html">Services</a>
-            <a href="/contact.html">Contact Us</a>
+            <a href="User_home.html">Home</a>
+            <a href="User_aboutUs.html">About Us</a>
+            <a href="User_Libservices.html">Services</a>
+            <a href="/User_contact.html">Contact Us</a>
           </nav>
         </div>
     </header>
@@ -262,7 +262,7 @@
 
 
 
-<script src="reservation.js"></script>
+<script src="User_reservation.js"></script>
 
 <script>
     const startTimeSelect = document.getElementById("start-time");
@@ -338,7 +338,8 @@ if (mainName && mainId) {
         program,
         numStudents,
         reason,
-        students
+        students,
+        created_at: new Date().toISOString()
       };
 
       try {
